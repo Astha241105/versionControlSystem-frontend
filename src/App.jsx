@@ -1,11 +1,15 @@
-import { useState } from 'react'
-
+import ProjectRoutes from "./Routes.jsx";
+import { AuthProvider } from "./authContext.jsx";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  // return (
-  // )
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <ProjectRoutes />
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

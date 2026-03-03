@@ -1,0 +1,127 @@
+.repo-page {
+  padding: 24px 40px;
+  min-height: calc(100vh - 56px);
+  background: #0d1117;
+  color: #c9d1d9;
+}
+
+.repo-card {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.repo-card h2 {
+  margin: 0 0 16px;
+  color: #f0f6fc;
+  font-size: 20px;
+}
+
+.repo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.repo-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: #f0f6fc;
+}
+
+.repo-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  color: #c9d1d9;
+  outline: none;
+}
+
+.repo-input:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.25);
+}
+
+.repo-radio-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.repo-radio {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 600;
+  color: #c9d1d9;
+}
+
+.repo-button {
+  width: fit-content;
+  padding: 10px 14px;
+  background: #238636;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f0f6fc;
+}
+
+.repo-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.repo-button:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.repo-hint {
+  margin: 14px 0 0;
+  color: #8b949e;
+  font-size: 14px;
+}
+
+.repo-error {
+  margin: 12px 0 0;
+  color: #ff7b72;
+  font-weight: 600;
+}
+
+.repo-search {
+  margin-bottom: 14px;
+}
+
+.repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.repo-list-item {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.repo-list-title {
+  color: #58a6ff;
+  font-weight: 700;
+}
+
+.repo-list-desc {
+  color: #8b949e;
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .repo-page {
+    padding: 16px;
+  }
+}
+

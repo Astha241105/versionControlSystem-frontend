@@ -1,20 +1,17 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import logo from "../assets/github-mark-white.svg";
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className="app-nav">
       <Link to="/">
-        <div>
-          <img
-            src="https://www.github.com/images/modules/logos_page/GitHub-Mark.png"
-            alt="GitHub Logo"
-          />
+        <div className="app-nav__brand">
+          <img src={logo} alt="GitHub Logo" />
           <h3>GitHub</h3>
         </div>
       </Link>
-      <div>
+      <div className="app-nav__links">
         <Link to="/create">
           <p>Create a Repository</p>
         </Link>
