@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 import Navbar from "../Navbar";
+import { getAllRepositories, getRepositoriesForUser } from "../../api/vcs";
 
 const Dashboard = () => {
   const [repositories, setRepositories] = useState([]);
@@ -13,24 +14,21 @@ const Dashboard = () => {
 
     const fetchRepositories = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/repo/user/${userId}`
-        );
-        const data = await response.json();
-        setRepositories(data.repositories);
+        const data = await getRepositoriesForUser(userId);
+        setRepositories(Array.isArray(data?.repositories) ? data.repositories : []);
       } catch (err) {
         console.error("Error while fecthing repositories: ", err);
+        setRepositories([]);
       }
     };
 
     const fetchSuggestedRepositories = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/repo/all`);
-        const data = await response.json();
-        setSuggestedRepositories(data);
-        console.log(suggestedRepositories);
+        const data = await getAllRepositories();
+        setSuggestedRepositories(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Error while fecthing repositories: ", err);
+        setSuggestedRepositories([]);
       }
     };
 

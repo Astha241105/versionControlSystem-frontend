@@ -1,18 +1,46 @@
 import React, { useMemo, useState } from "react";
 import Navbar from "../Navbar";
 import "./repo.css";
+import { createRepository } from "../../api/vcs";
 
 const CreateRepository = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("public");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const isValid = useMemo(() => name.trim().length > 0, [name]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Frontend-only page: backend endpoint is project-specific.
-    alert("UI is ready. Hook this form to your backend create-repo endpoint.");
+    const owner = localStorage.getItem("userId");
+    if (!owner) {
+      setError("You must be logged in to create a repository.");
+      return;
+    }
+
+    try {
+      setError("");
+      setLoading(true);
+
+      await createRepository({
+        owner,
+        name: name.trim(),
+        description: description.trim(),
+        visibility: visibility === "public",
+      });
+
+      window.location.href = "/";
+    } catch (e2) {
+      const message =
+        e2?.response?.data?.error ||
+        e2?.response?.data?.message ||
+        "Could not create repository.";
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -68,14 +96,11 @@ const CreateRepository = () => {
             </div>
 
             <button className="repo-button" disabled={!isValid} type="submit">
-              Create repository
+              {loading ? "Creating..." : "Create repository"}
             </button>
           </form>
 
-          <p className="repo-hint">
-            Note: this page fixes the broken route. Connect the submit handler
-            to your backend when ready.
-          </p>
+          {error ? <p className="repo-error">{error}</p> : null}
         </div>
       </section>
     </>

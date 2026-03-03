@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Navbar from "../Navbar";
 import "./repo.css";
+import { getAllRepositories } from "../../api/vcs";
 
 const StarredRepositories = () => {
   const [repos, setRepos] = useState([]);
@@ -11,8 +12,7 @@ const StarredRepositories = () => {
     const fetchRepos = async () => {
       try {
         setError("");
-        const res = await fetch("http://localhost:5000/repo/all");
-        const data = await res.json();
+        const data = await getAllRepositories();
         setRepos(Array.isArray(data) ? data : []);
       } catch (e) {
         setError("Could not load repositories. Is the backend running?");

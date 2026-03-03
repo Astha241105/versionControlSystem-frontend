@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./profile.css";
 import Navbar from "../Navbar";
 import { UnderlineNav } from "@primer/react";
 import { BookIcon, RepoIcon } from "@primer/octicons-react";
 import HeatMapProfile from "./HeatMap";
 import { useAuth } from "../../authContext";
+import { getUserProfile } from "../../api/vcs";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -19,10 +19,8 @@ const Profile = () => {
 
       if (userId) {
         try {
-          const response = await axios.get(
-            `http://localhost:5000/userProfile/${userId}`
-          );
-          setUserDetails(response.data);
+          const data = await getUserProfile(userId);
+          setUserDetails(data);
         } catch (err) {
           console.error("Cannot fetch user details: ", err);
         }

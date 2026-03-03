@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { useAuth } from "../../authContext";
+import { signup } from "../../api/vcs";
 import { Link } from "react-router-dom";
 import { Heading } from "@primer/react";
 import { Box, Button } from "@primer/react";
@@ -21,16 +21,12 @@ const Signup=()=>{
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/signup", {
-        email: email,
-        password: password,
-        username: username,
-      });
+      const data = await signup({ email, password, username });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("userId", res.data.userId);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
 
-      setCurrentUser(res.data.userId);
+      setCurrentUser(data.userId);
       setLoading(false);
 
       window.location.href = "/";
